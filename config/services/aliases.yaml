@@ -1,0 +1,3 @@
+services:
+    League\Tactician\CommandBus: '@tactician.commandbus.default'
+    Eventscase\MovieRental\Domain\Movie\Repository\MovieRepositoryInterface: '@Eventscase\MovieRental\Infrastructure\Movie\Repository\MovieRepository'

@@ -1,0 +1,33 @@
+version: '3'
+services:
+  app:
+    container_name: app
+    build:
+      context: ./
+      dockerfile: ./etc/docker/Dockerfile
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    working_dir: /var/www/html
+
+    volumes:
+      - ./:/var/www/html/
+      - ./etc/docker/php/conf:/etc/apache2/sites-available/
+      - ~/.ssh:/root/.ssh
+    ports:
+      - 8002:80
+    links:
+      - mysql
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: db
+    image: mysql:5.7.14
+    volumes:
+    - ./etc/docker/mysql:/var/lib/mysql
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=eventscase
+    ports:
+    - 3308:3306
