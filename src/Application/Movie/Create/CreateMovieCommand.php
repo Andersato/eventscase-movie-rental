@@ -30,7 +30,6 @@ final class CreateMovieCommand
         return $this->id;
     }
 
-
     public function getTitle(): string
     {
         return $this->title;

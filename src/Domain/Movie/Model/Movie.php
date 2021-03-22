@@ -9,6 +9,7 @@ use BornFree\TacticianDomainEvent\Recorder\EventRecorderCapabilities;
 use Doctrine\Common\Collections\ArrayCollection;
 use Eventscase\MovieRental\Domain\Movie\Event\MovieWasCreated;
 use Eventscase\MovieRental\Domain\Shared\Traits\DateTimeTrait;
+use Ramsey\Uuid\UuidInterface;
 
 final class Movie implements ContainsRecordedEvents
 {
@@ -26,7 +27,7 @@ final class Movie implements ContainsRecordedEvents
 
     public function __construct(MovieId $id, string $title, string $description, float $price, int $year, int $duration, int $stock)
     {
-        $this->id          = $id;
+        $this->id          = $id->value();
         $this->title       = $title;
         $this->description = $description;
         $this->price       = $price;
@@ -40,7 +41,7 @@ final class Movie implements ContainsRecordedEvents
         $this->record(new MovieWasCreated($this));
     }
 
-    public function getId(): MovieId
+    public function getId(): UuidInterface
     {
         return $this->id;
     }

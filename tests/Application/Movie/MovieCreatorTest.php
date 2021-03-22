@@ -7,7 +7,6 @@ namespace Eventscase\MovieRental\Tests\Application\Movie;
 use Eventscase\MovieRental\Application\Movie\Create\CreateMovieCommand;
 use Eventscase\MovieRental\Domain\Movie\Model\MovieId;
 use Eventscase\MovieRental\Domain\Movie\Repository\MovieRepositoryInterface;
-use Eventscase\MovieRental\Domain\Shared\ValueObject\Uuid;
 use Eventscase\MovieRental\Tests\BaseTestCase;
 
 class MovieCreatorTest extends BaseTestCase
@@ -19,10 +18,11 @@ class MovieCreatorTest extends BaseTestCase
         /** @var MovieRepositoryInterface $repository */
         $repository = $this->get(MovieRepositoryInterface::class);
 
-        $movieId = Uuid::random()->value();
+        $uuid = MovieId::random()->value();
+        $movieId = new MovieId($uuid);
 
         $command = new CreateMovieCommand(
-           $movieId,
+            $uuid->toString(),
             'Movie test',
             'Description movie test',
             5,
@@ -33,10 +33,10 @@ class MovieCreatorTest extends BaseTestCase
 
         $commandBus->handle($command);
 
-        $movie = $repository->find(new MovieId($movieId));
+        $movie = $repository->find($movieId);
         $this->assertNotNull($movie);
 
-        $this->assertEquals($movie->getId()->value(), $command->getId());
+        $this->assertEquals($movie->getId(), $command->getId());
         $this->assertEquals($movie->getTitle(), $command->getTitle());
         $this->assertEquals($movie->getDescription(), $command->getDescription());
         $this->assertEquals($movie->getPrice(), $command->getPrice());

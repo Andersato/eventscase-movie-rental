@@ -5,6 +5,6 @@ tactician:
         default:
             middleware:
                 - tactician_domain_events.middleware.release_recorded_events
-                - Eventscase\MovieRental\Infrastructure\Shared\CommandBus\Middleware\AppMiddleware
+#                - Eventscase\MovieRental\Infrastructure\Shared\CommandBus\Middleware\AppMiddleware
                 - tactician.middleware.doctrine
                 - tactician.middleware.command_handler

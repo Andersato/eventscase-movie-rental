@@ -20,7 +20,7 @@ final class CreateMovieHandler
     public function handle(CreateMovieCommand $command): void
     {
         $movie = new Movie(
-            new MovieId($command->getId()),
+            new MovieId(MovieId::fromString($command->getId())),
             $command->getTitle(),
             $command->getDescription(),
             $command->getPrice(),
