@@ -23,8 +23,8 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 #    php -r "unlink('composer-setup.php');"
 
 # Dependencias Node
-RUN curl -sL https://deb.nodesource.com/setup_15.x | bash - && \
-    apt-get update && apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_15.x | bash -
+RUN apt-get update && apt-get install -y nodejs libmcrypt-dev git zip unzip
 
 #RUN curl -sL https://rpm.nodesource.com/setup_12.x | bash - && \
 #    yum -y install nodejs && \
