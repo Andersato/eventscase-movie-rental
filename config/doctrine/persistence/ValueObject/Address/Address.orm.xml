@@ -4,7 +4,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                          http://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
 
-    <embeddable name="Eventscase\MovieRental\Domain\Shared\ValueObject\Address" table="address">
+    <embeddable name="Eventscase\MovieRental\Domain\Shared\ValueObject\Address">
 
         <field name="zipCode" />
         <field name="houseNumber" />

@@ -6,24 +6,21 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <entity name="Eventscase\MovieRental\Domain\User\Model\User" table="users">
-        <id name="id" type="uuid_binary_ordered_time" />
+        <id name="id" type="userId" />
 
         <field name="name"  />
         <field name="surnames" />
-        <field name="dni" />
+        <field name="identificationNumber" />
         <field name="phone" />
-        <field name="email" unique="true" />
-        <field name="password"  />
         <field name="loginToken" />
-        <field name="roles" type="array"  />
         <field name="createdAt" type="datetime" />
         <field name="updatedAt" type="datetime" />
         <field name="deletedAt" type="datetime" nullable="true" />
         <embedded name="address" class="Eventscase\MovieRental\Domain\Shared\ValueObject\Address" use-column-prefix="false" />
+        <embedded name="userAuth" class="Eventscase\MovieRental\Domain\User\ValueObject\UserAuth" use-column-prefix="false" />
 
         <gedmo:soft-deleteable field-name="deletedAt" />
 
         <one-to-many field="orders" target-entity="Eventscase\MovieRental\Domain\Order\Model\Order" mapped-by="user" />
-
     </entity>
 </doctrine-mapping>

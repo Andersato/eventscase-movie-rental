@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Eventscase\MovieRental\Application\Movie\Create;
 
 use Eventscase\MovieRental\Domain\Movie\Model\Movie;
-use Eventscase\MovieRental\Domain\Movie\Model\MovieId;
+use Eventscase\MovieRental\Domain\Movie\ValueObject\MovieId;
 use Eventscase\MovieRental\Domain\Movie\Repository\MovieRepositoryInterface;
 
 final class CreateMovieHandler
@@ -20,7 +20,7 @@ final class CreateMovieHandler
     public function handle(CreateMovieCommand $command): void
     {
         $movie = new Movie(
-            new MovieId($command->getId()),
+            new MovieId(MovieId::fromString($command->getId())),
             $command->getTitle(),
             $command->getDescription(),
             $command->getPrice(),

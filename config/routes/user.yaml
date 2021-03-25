@@ -1,0 +1,19 @@
+app_login:
+  path: /login
+  controller: Eventscase\MovieRental\Ui\Web\User\Controller\Security\SecurityController::login
+  methods:  [POST, GET]
+
+app_logout:
+  path: /logout
+  controller: Eventscase\MovieRental\Ui\Web\User\Controller\Security\SecurityController::logout
+  methods:  [POST, GET]
+
+register:
+  path: /register
+  controller: Eventscase\MovieRental\Ui\Web\User\Controller\RegisterUserController::register
+  methods: [POST, GET]
+
+rented_movies:
+  path: /user/rented-movies
+  controller: Eventscase\MovieRental\Ui\Web\User\Controller\RentedMoviesUserController::show
+  methods: [GET]

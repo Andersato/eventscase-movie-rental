@@ -11,7 +11,7 @@ final class Address
     private $street;
     private $city;
 
-    private function __construct(
+    public function __construct(
         string $zipCode,
         string $houseNumber,
         string $street,
@@ -21,20 +21,6 @@ final class Address
         $this->houseNumber = $houseNumber;
         $this->street = $street;
         $this->city = $city;
-    }
-
-    public static function create(
-        string $zipCode,
-        string $houseNumber,
-        string $street,
-        string $city
-    ) {
-        return new self(
-            $zipCode,
-            $houseNumber,
-            $street,
-            $city
-        );
     }
 
     public function getZipCode(): string

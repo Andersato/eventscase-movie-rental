@@ -1,0 +1,4 @@
+apply_transition:
+  path: /change-status/{orderId}/{transition}
+  controller: Eventscase\MovieRental\Ui\Web\Order\Controller\ApplyTransitionOrderController::apply
+  methods:  [GET]

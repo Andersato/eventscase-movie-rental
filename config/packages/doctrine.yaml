@@ -2,6 +2,12 @@ doctrine:
     dbal:
         url: '%env(resolve:DATABASE_URL)%'
 
+        types:
+            userId: Eventscase\MovieRental\Infrastructure\User\Doctrine\Types\UserIdType
+            movieId: Eventscase\MovieRental\Infrastructure\Movie\Doctrine\Types\MovieIdType
+            orderId: Eventscase\MovieRental\Infrastructure\Order\Doctrine\Types\OrderIdType
+            orderLineId: Eventscase\MovieRental\Infrastructure\Order\Doctrine\Types\OrderLineIdType
+
         # IMPORTANT: You MUST configure your server version,
         # either here or in the DATABASE_URL env var (see .env file)
         #server_version: '13'
@@ -13,7 +19,7 @@ doctrine:
             Address:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/../../../config/doctrine/persistence/ValueObject'
+                dir: '%kernel.project_dir%/../../../config/doctrine/persistence/ValueObject/Address'
                 prefix: 'Eventscase\MovieRental\Domain\Shared\ValueObject'
                 alias: Address
             Movie:
@@ -40,6 +46,12 @@ doctrine:
                 dir: '%kernel.project_dir%/../../../config/doctrine/persistence/User/Model'
                 prefix: 'Eventscase\MovieRental\Domain\User\Model'
                 alias: User
+            UserAuth:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/../../../config/doctrine/persistence/ValueObject/UserAuth'
+                prefix: 'Eventscase\MovieRental\Domain\User\ValueObject'
+                alias: UserAuth
         filters:
             softdeleteable:
                 class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
