@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Eventscase\MovieRental\Ui\Cli\Command;
 
 use Eventscase\MovieRental\Application\Movie\Create\CreateMovieCommand;
-use Eventscase\MovieRental\Application\Movie\Find\GetAllMovieQuery;
+use Eventscase\MovieRental\Application\Movie\Find\GetAllMoviesQuery;
 use Eventscase\MovieRental\Application\Movie\Find\GetMovieQuery;
 use Eventscase\MovieRental\Application\Order\Create\CreateOrderCommand;
 use Eventscase\MovieRental\Application\Order\Dto\OrderLineItem;

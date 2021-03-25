@@ -1,0 +1,14 @@
+show_movies_admin:
+  path: /admin/show-movies
+  controller: Eventscase\MovieRental\Ui\Web\Movie\Controller\ShowAllMoviesController::show
+  methods: [GET]
+
+create_movie_admin:
+  path: /admin/create-movie
+  controller: Eventscase\MovieRental\Ui\Web\Movie\Controller\CreateMovieController::create
+  methods:  [POST, GET]
+
+show_rental_movie_admin:
+  path: /admin/rented-movies
+  controller: Eventscase\MovieRental\Ui\Web\Order\Controller\ShowAllRentalMoviesController::show
+  methods:  [GET]

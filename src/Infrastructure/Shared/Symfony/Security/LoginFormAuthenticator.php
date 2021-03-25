@@ -1,16 +1,19 @@
 <?php
 
-namespace Eventscase\MovieRental\Infrastructure\Shared\Symfony;
+namespace Eventscase\MovieRental\Infrastructure\Shared\Symfony\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Eventscase\MovieRental\Application\User\Find\GetUserLoginQuery;
 use Eventscase\MovieRental\Domain\User\Repository\EncodePasswordInterface;
+use Eventscase\MovieRental\Domain\User\ValueObject\UserAuth;
 use Eventscase\MovieRental\Infrastructure\User\Security\Authenticator;
 use League\Tactician\CommandBus;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Security;
@@ -26,21 +29,23 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 {
     use TargetPathTrait;
 
-    public const LOGIN_ROUTE = 'app_login';
+    public const LOGIN_ROUTE = 'user_login';
 
     private $entityManager;
     private $urlGenerator;
     private $csrfTokenManager;
     private $commandBus;
     private $userPasswordEncoder;
+    private $security;
 
-    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, CommandBus $commandBus, EncodePasswordInterface $userPasswordEncoder)
+    public function __construct(EntityManagerInterface $entityManager, UrlGeneratorInterface $urlGenerator, CsrfTokenManagerInterface $csrfTokenManager, CommandBus $commandBus, EncodePasswordInterface $userPasswordEncoder, AuthorizationChecker $security)
     {
-        $this->entityManager    = $entityManager;
-        $this->urlGenerator     = $urlGenerator;
-        $this->csrfTokenManager = $csrfTokenManager;
-        $this->commandBus       = $commandBus;
+        $this->entityManager       = $entityManager;
+        $this->urlGenerator        = $urlGenerator;
+        $this->csrfTokenManager    = $csrfTokenManager;
+        $this->commandBus          = $commandBus;
         $this->userPasswordEncoder = $userPasswordEncoder;
+        $this->security            = $security;
     }
 
     public function supports(Request $request)
@@ -98,15 +103,16 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        //dump($this->getTargetPath($request->getSession(), $providerKey));die;
+        $route = 'rented_movies';
 
-        if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
-            return new RedirectResponse($targetPath);
+        //if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
+        //    return new RedirectResponse($targetPath);
+        //}
+        if ($this->security->isGranted(UserAuth::ROLE_ADMIN)) {
+            $route = 'show_movies_admin';
         }
 
-        //Comprobar role de usuario y enviar a sus zonas de administración
-
-        return new RedirectResponse($this->urlGenerator->generate('rented_movies'));
+        return new RedirectResponse($this->urlGenerator->generate($route));
     }
 
     protected function getLoginUrl()

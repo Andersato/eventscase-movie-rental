@@ -6,9 +6,9 @@
 
     <embeddable name="Eventscase\MovieRental\Domain\Shared\ValueObject\Address">
 
-        <field name="zipCode" />
-        <field name="houseNumber" />
-        <field name="street" />
-        <field name="city" />
+        <field name="zipCode" nullable="true" />
+        <field name="houseNumber" nullable="true" />
+        <field name="street" nullable="true" />
+        <field name="city" nullable="true" />
     </embeddable>
 </doctrine-mapping>

@@ -27,6 +27,8 @@ final class CreateMovieController extends AbstractAppController
             );
 
             $this->addFlash('success', 'Película creada correctamente');
+
+            return $this->redirectToRoute('show_movies_admin');
         }
 
         return $this->render('Movie/create_movie.html.twig', []);

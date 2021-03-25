@@ -12,9 +12,10 @@ security:
             provider: user_provider
             guard:
                 authenticators:
-                    - Eventscase\MovieRental\Infrastructure\Shared\Symfony\LoginFormAuthenticator
+                    - Eventscase\MovieRental\Infrastructure\Shared\Symfony\Security\LoginFormAuthenticator
             logout:
-                path: app_logout
+                path: user_logout
+                success_handler: Eventscase\MovieRental\Infrastructure\Shared\Symfony\Security\LogoutSuccessHandler
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -28,4 +29,4 @@ security:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/user, roles: ROLE_USER }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }

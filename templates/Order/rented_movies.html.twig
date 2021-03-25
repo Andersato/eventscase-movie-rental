@@ -17,6 +17,8 @@
                             <th scope="col" colspan="3">Películas</th>
                             <th></th>
                             <th></th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,12 +38,22 @@
                                 </td>
                                 <td>
                                     {% if order.status == constant('Eventscase\\MovieRental\\Domain\\Order\\Model\\Order::STATUS_RENTEND') %}
-                                        <a href="{{ path('apply_transition', {orderId: order.id, transition: constant('Eventscase\\MovieRental\\Domain\\Order\\Model\\Order::TRANSITION_TO_CANCELLED')}) }}" class="btn btn-danger">Cancelar</a>
+                                        <a href="{{ path('apply_transition', {orderId: order.id, transition: constant('Eventscase\\MovieRental\\Domain\\Order\\Model\\Order::TRANSITION_TO_SENT')}) }}" class="btn btn-primary">Enviado</a>
                                     {% endif %}
                                 </td>
                                 <td>
-                                    {% if order.status == constant('Eventscase\\MovieRental\\Domain\\Order\\Model\\Order::STATUS_RECEIVED') %}
-                                        <a href="{{ path('apply_transition', {orderId: order.id, transition: constant('Eventscase\\MovieRental\\Domain\\Order\\Model\\Order::TRANSITION_TO_DELIVERED')}) }}" class="btn btn-success">Devolver</a>
+                                    {% if order.status == constant('Eventscase\\MovieRental\\Domain\\Order\\Model\\Order::STATUS_SENT') %}
+                                        <a href="{{ path('apply_transition', {orderId: order.id, transition: constant('Eventscase\\MovieRental\\Domain\\Order\\Model\\Order::TRANSITION_TO_RECEIVED')}) }}" class="btn btn-info">Recibido</a>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if order.status == constant('Eventscase\\MovieRental\\Domain\\Order\\Model\\Order::STATUS_SENT') %}
+                                        <a href="{{ path('apply_transition', {orderId: order.id, transition: constant('Eventscase\\MovieRental\\Domain\\Order\\Model\\Order::TRANSITION_TO_UNRECEIVED')}) }}" class="btn btn-warning">No recibido</a>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if order.status == constant('Eventscase\\MovieRental\\Domain\\Order\\Model\\Order::STATUS_DELIVERED') %}
+                                        <a href="{{ path('apply_transition', {orderId: order.id, transition: constant('Eventscase\\MovieRental\\Domain\\Order\\Model\\Order::TRANSITION_TO_RETURNED')}) }}" class="btn btn-success">Entregado</a>
                                     {% endif %}
                                 </td>
                             </tr>

@@ -6,8 +6,12 @@ namespace Eventscase\MovieRental\Domain\User\ValueObject;
 
 final class UserAuth
 {
+
+    public const ROLE_USER  = 'ROLE_USER';
+    public const ROLE_ADMIN = 'ROLE_ADMIN';
+
     private const DEFAULT_ROLES = [
-        'ROLE_USER'
+        self::ROLE_USER
     ];
 
     private $email;

@@ -27,20 +27,26 @@ final class RegisterUserHandler
 
     public function handle(RegisterUserCommand $command)
     {
+        $address = null;
+        if (null !== $command->getAddress()) {
+           $address = new Address(
+               $command->getAddress()->getZipCode(),
+               $command->getAddress()->getHouseNumber(),
+               $command->getAddress()->getStreet(),
+               $command->getAddress()->getCity()
+           );
+        }
+
         $user = new User(
             new UserId(UserId::fromString($command->getId())),
-            new Address(
-                $command->getAddress()->getZipCode(),
-                $command->getAddress()->getHouseNumber(),
-                $command->getAddress()->getStreet(),
-                $command->getAddress()->getCity()
-            ),
             new Phone($command->getPhone()),
             new Email($command->getEmail()),
             new IdentificationNumber($command->getIdentificationNumber()),
             $command->getName(),
             $command->getSurnames(),
-            $this->encoder->encoder($command->getPassword())
+            $this->encoder->encoder($command->getPassword()),
+            $address,
+            $command->getRoles()
         );
 
         if (null !== $this->userRepository->findByUsername($command->getEmail())) {

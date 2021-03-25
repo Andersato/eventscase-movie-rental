@@ -1,3 +1,8 @@
+front_homepage:
+  path: /
+  controller: Eventscase\MovieRental\Ui\Web\App\Controller\ShowMoviesController::show
+  methods: [GET]
+
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index

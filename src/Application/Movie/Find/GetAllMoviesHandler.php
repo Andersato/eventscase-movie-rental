@@ -19,7 +19,7 @@ final class GetAllMoviesHandler
         $this->paginationDataTransformer = $paginationDataTransformer;
     }
 
-    public function handle(GetAllMovieQuery $command): PaginationResponse
+    public function handle(GetAllMoviesQuery $command): PaginationResponse
     {
         $pager = $this->movieRepository->findAllPaginated();
 

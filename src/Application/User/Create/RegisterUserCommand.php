@@ -16,8 +16,9 @@ class RegisterUserCommand
     private $password;
     private $phone;
     private $address;
+    private $roles;
 
-    public function __construct(string $id, string $name, string $surnames, string $email, string $identificationNumber, string $password, string $phone, Address $address)
+    public function __construct(string $id, string $name, string $surnames, string $email, string $identificationNumber, string $password, string $phone, ?Address $address, array $roles = null)
     {
         $this->id       = $id;
         $this->name     = $name;
@@ -27,6 +28,7 @@ class RegisterUserCommand
         $this->password = $password;
         $this->phone    = $phone;
         $this->address  = $address;
+        $this->roles    = $roles;
     }
 
     public function getId(): string
@@ -64,8 +66,13 @@ class RegisterUserCommand
         return $this->phone;
     }
 
-    public function getAddress(): Address
+    public function getAddress(): ?Address
     {
         return $this->address;
+    }
+
+    public function getRoles(): ?array
+    {
+        return $this->roles;
     }
 }

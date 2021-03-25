@@ -1,12 +1,10 @@
-app_login:
+user_login:
   path: /login
   controller: Eventscase\MovieRental\Ui\Web\User\Controller\Security\SecurityController::login
   methods:  [POST, GET]
 
-app_logout:
+user_logout:
   path: /logout
-  controller: Eventscase\MovieRental\Ui\Web\User\Controller\Security\SecurityController::logout
-  methods:  [POST, GET]
 
 register:
   path: /register

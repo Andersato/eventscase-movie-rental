@@ -32,7 +32,7 @@ class User implements ContainsRecordedEvents
     private $userAuth;
 
 
-    public function __construct(UserId $id, Address $address, Phone $phone, Email $email, IdentificationNumber $identificationNumber, string $name, string $surnames, string $password, array $roles = null)
+    public function __construct(UserId $id, Phone $phone, Email $email, IdentificationNumber $identificationNumber, string $name, string $surnames, string $password, ?Address $address, array $roles = null)
     {
         $this->id                   = $id;
         $this->address              = $address;
@@ -79,7 +79,7 @@ class User implements ContainsRecordedEvents
         return $this->userAuth;
     }
 
-    public function getAddress(): Address
+    public function getAddress(): ?Address
     {
         return $this->address;
     }

@@ -36,7 +36,7 @@ final class RegisterUserController extends AbstractAppController
                     )
                 );
 
-                return $this->redirectToRoute('app_login');
+                return $this->redirectToRoute('user_login');
             } catch (UserAlreadyExistsException $exception) {
                 $this->addFlash('error', $exception->getMessage());
             }

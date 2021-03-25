@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Eventscase\MovieRental\Ui\Web\App\Controller;
 
-use Eventscase\MovieRental\Application\Movie\Find\GetAllMovieQuery;
+use Eventscase\MovieRental\Application\Movie\Find\GetAllMoviesQuery;
 use Eventscase\MovieRental\Application\Order\Create\CreateOrderCommand;
 use Eventscase\MovieRental\Application\Order\Dto\OrderLineItem;
 use Eventscase\MovieRental\Ui\Web\Shared\Controller\AbstractAppController;
@@ -16,7 +16,7 @@ final class ShowMoviesController extends AbstractAppController
     public function show(Request $request)
     {
         $pager = $this->commandBus->handle(
-            new GetAllMovieQuery()
+            new GetAllMoviesQuery()
         );
 
         if ($request->isMethod('POST')) {
@@ -41,6 +41,10 @@ final class ShowMoviesController extends AbstractAppController
                 $this->getUser()->getUsername(),
                 $movies
             ));
+
+            $this->addFlash('success', 'Tu alquiler se ha hecho de forma correcta');
+
+            return $this->redirectToRoute('rented_movies');
         }
 
         return $this->render('App/movies.html.twig', array(

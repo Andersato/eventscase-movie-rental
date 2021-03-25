@@ -40,6 +40,7 @@ services:
     Eventscase\MovieRental\Infrastructure\Shared\Symfony\LoginFormAuthenticator:
     Symfony\Component\Security\Core\Encoder\NativePasswordEncoder:
     Eventscase\MovieRental\Infrastructure\User\Security\UserProvider:
+    Symfony\Component\Security\Core\Authorization\AuthorizationChecker:
 
     Eventscase\MovieRental\Infrastructure\Order\EventListener\OrderWasCreatedListener:
         tags:
