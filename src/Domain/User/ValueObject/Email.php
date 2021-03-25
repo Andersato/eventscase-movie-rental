@@ -19,7 +19,7 @@ final class Email
             throw new InvalidEmailException($error);
         }
 
-        $this->value;
+        $this->value = $value;
     }
 
     public function __toString()

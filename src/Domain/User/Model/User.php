@@ -10,10 +10,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Eventscase\MovieRental\Domain\Shared\Traits\DateTimeTrait;
 use Eventscase\MovieRental\Domain\Shared\ValueObject\Address;
 use Eventscase\MovieRental\Domain\User\Event\UserWasCreated;
+use Eventscase\MovieRental\Domain\User\ValueObject\UserId;
 use Eventscase\MovieRental\Domain\User\ValueObject\Email;
+use Eventscase\MovieRental\Domain\User\ValueObject\IdentificationNumber;
 use Eventscase\MovieRental\Domain\User\ValueObject\Phone;
+use Eventscase\MovieRental\Domain\User\ValueObject\UserAuth;
 
-final class User implements ContainsRecordedEvents
+class User implements ContainsRecordedEvents
 {
     use EventRecorderCapabilities;
     use DateTimeTrait;
@@ -21,31 +24,27 @@ final class User implements ContainsRecordedEvents
     private $id;
     private $name;
     private $surnames;
-    private $dni;
+    private $identificationNumber;
     private $phone;
-    private $email;
     private $address;
-    private $password;
     private $loginToken;
-    private $roles;
     private $orders;
+    private $userAuth;
 
 
-    public function __construct(UserId $id, Address $address, Phone $phone, Email $email, string $name, string $surnames, string $dni, string $password, string $loginToken, ArrayCollection $roles)
+    public function __construct(UserId $id, Address $address, Phone $phone, Email $email, IdentificationNumber $identificationNumber, string $name, string $surnames, string $password, array $roles = null)
     {
-        $this->id         = $id;
-        $this->address    = $address;
-        $this->phone      = $phone;
-        $this->email      = $email;
-        $this->name       = $name;
-        $this->surnames   = $surnames;
-        $this->dni        = $dni;
-        $this->password   = $password;
-        $this->loginToken = $loginToken;
-        $this->roles      = $roles;
-        $this->orders     = new ArrayCollection();
-        $this->createdAt  = new \DateTimeImmutable();
-        $this->updatedAt  = new \DateTimeImmutable();
+        $this->id                   = $id;
+        $this->address              = $address;
+        $this->phone                = $phone;
+        $this->name                 = $name;
+        $this->surnames             = $surnames;
+        $this->identificationNumber = $identificationNumber;
+        $this->loginToken           = base_convert(sha1($password.$email->__toString()), 16, 36);
+        $this->orders               = new ArrayCollection();
+        $this->userAuth             = new UserAuth($email->__toString(), $password, $roles);
+        $this->createdAt            = new \DateTimeImmutable();
+        $this->updatedAt            = new \DateTimeImmutable();
 
         $this->record(new UserWasCreated($this));
     }
@@ -65,9 +64,9 @@ final class User implements ContainsRecordedEvents
         return $this->surnames;
     }
 
-    public function getDni(): string
+    public function getIdentificationNumber(): IdentificationNumber
     {
-        return $this->dni;
+        return $this->identificationNumber;
     }
 
     public function getPhone(): Phone
@@ -75,9 +74,9 @@ final class User implements ContainsRecordedEvents
         return $this->phone;
     }
 
-    public function getEmail(): Email
+    public function getUserAuth(): UserAuth
     {
-        return $this->email;
+        return $this->userAuth;
     }
 
     public function getAddress(): Address
@@ -85,18 +84,13 @@ final class User implements ContainsRecordedEvents
         return $this->address;
     }
 
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
     public function getLoginToken(): string
     {
         return $this->loginToken;
     }
 
-    public function getRoles(): ArrayCollection
+    public function getOrders(): ArrayCollection
     {
-        return $this->roles;
+        return $this->orders;
     }
 }

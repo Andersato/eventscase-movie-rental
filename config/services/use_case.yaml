@@ -7,6 +7,8 @@ services:
     # commandbus autowired
     Eventscase\MovieRental\Application\:
         resource: '../../src/Application/*'
-        exclude: '../../src/Application/*/*/*{Query.php,Command.php}'
+        exclude:
+            - '../../src/Application/*/*/*{Query.php,Command.php}'
+            - '../../src/Application/Order/Dto/OrderLineItem.php'
         tags:
             - { name: tactician.handler, typehints: true }

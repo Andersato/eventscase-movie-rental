@@ -1,0 +1,4 @@
+show:
+  path: /movies
+  controller: Eventscase\MovieRental\Ui\Web\App\Controller\ShowMoviesController::show
+  methods: [GET, POST]

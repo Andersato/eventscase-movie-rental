@@ -1,0 +1,4 @@
+create_movie:
+  path: /add-movie
+  controller: Eventscase\MovieRental\Ui\Web\Movie\Controller\CreateMovieController::create
+  methods:  [POST, GET]

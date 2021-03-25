@@ -1,3 +1,8 @@
 services:
     League\Tactician\CommandBus: '@tactician.commandbus.default'
     Eventscase\MovieRental\Domain\Movie\Repository\MovieRepositoryInterface: '@Eventscase\MovieRental\Infrastructure\Movie\Repository\MovieRepository'
+    Eventscase\MovieRental\Domain\User\Repository\UserRepositoryInterface: '@Eventscase\MovieRental\Infrastructure\User\Repository\UserRepository'
+    Eventscase\MovieRental\Domain\User\Repository\EncodePasswordInterface: '@Eventscase\MovieRental\Infrastructure\User\Repository\EncodePassword'
+    Eventscase\MovieRental\Infrastructure\User\Security\UserProvider: '@uSymfony\Component\Security\Core\User\UserProviderInterface'
+    Eventscase\MovieRental\Domain\Order\Repository\OrderRepositoryInterface: '@Eventscase\MovieRental\Infrastructure\Order\Repository\OrderRepository'
+    Eventscase\MovieRental\Domain\Shared\MailSender\MailSenderInterface: '@Eventscase\MovieRental\Infrastructure\Shared\Mail\SwiftMailSender'

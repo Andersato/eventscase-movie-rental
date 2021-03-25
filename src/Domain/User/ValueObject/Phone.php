@@ -10,7 +10,9 @@ final class Phone
 
     public function __construct(string $value)
     {
-        $this->value;
+        //Do validation
+
+        $this->value = $value;
     }
 
     public function __toString()

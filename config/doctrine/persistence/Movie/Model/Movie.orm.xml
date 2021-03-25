@@ -6,7 +6,7 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <entity name="Eventscase\MovieRental\Domain\Movie\Model\Movie" table="movies">
-        <id name="id" type="uuid_binary_ordered_time" />
+        <id name="id" type="movieId" />
 
         <field name="title" />
         <field name="description" type="text" />

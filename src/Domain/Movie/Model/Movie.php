@@ -8,10 +8,13 @@ use BornFree\TacticianDomainEvent\Recorder\ContainsRecordedEvents;
 use BornFree\TacticianDomainEvent\Recorder\EventRecorderCapabilities;
 use Doctrine\Common\Collections\ArrayCollection;
 use Eventscase\MovieRental\Domain\Movie\Event\MovieWasCreated;
+use Eventscase\MovieRental\Domain\Movie\ValueObject\MovieId;
+use Eventscase\MovieRental\Domain\Movie\Response\MovieResponse;
 use Eventscase\MovieRental\Domain\Shared\Traits\DateTimeTrait;
-use Ramsey\Uuid\UuidInterface;
+use Eventscase\MovieRental\Domain\Shared\Transform\DataResponse;
+use Eventscase\MovieRental\Domain\Shared\Transform\DataTransformerInterface;
 
-final class Movie implements ContainsRecordedEvents
+class Movie implements ContainsRecordedEvents, DataTransformerInterface
 {
     use EventRecorderCapabilities;
     use DateTimeTrait;
@@ -27,7 +30,7 @@ final class Movie implements ContainsRecordedEvents
 
     public function __construct(MovieId $id, string $title, string $description, float $price, int $year, int $duration, int $stock)
     {
-        $this->id          = $id->value();
+        $this->id          = $id;
         $this->title       = $title;
         $this->description = $description;
         $this->price       = $price;
@@ -41,7 +44,7 @@ final class Movie implements ContainsRecordedEvents
         $this->record(new MovieWasCreated($this));
     }
 
-    public function getId(): UuidInterface
+    public function getId(): MovieId
     {
         return $this->id;
     }
@@ -79,5 +82,18 @@ final class Movie implements ContainsRecordedEvents
     public function getOrderLines(): ArrayCollection
     {
         return $this->orderLines;
+    }
+
+    public function transform(): DataResponse
+    {
+        return new MovieResponse(
+            $this->getId()->value()->toString(),
+            $this->getTitle(),
+            $this->getDescription(),
+            $this->getPrice(),
+            $this->getYear(),
+            $this->getDuration(),
+            $this->getStock()
+        );
     }
 }

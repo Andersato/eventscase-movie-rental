@@ -13,7 +13,6 @@ class Uuid
 
     public function __construct(UuidInterface $value = null)
     {
-        //$this->ensureIsValidUuid($value);
         $this->value = $value ?? RamseyUuid::uuid1();
     }
 
@@ -31,13 +30,6 @@ class Uuid
     {
         return RamseyUuid::fromString($value);
     }
-
-    //private function ensureIsValidUuid($id): void
-    //{
-    //    if (!RamseyUuid::isValid($id)) {
-    //        throw new InvalidArgumentException(sprintf('<%s> does not allow the value <%s>.', static::class, $id));
-    //    }
-    //}
 
     public function __toString()
     {

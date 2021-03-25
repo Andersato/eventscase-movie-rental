@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Eventscase\MovieRental\Tests\Application\Movie;
 
 use Eventscase\MovieRental\Application\Movie\Create\CreateMovieCommand;
-use Eventscase\MovieRental\Domain\Movie\Model\MovieId;
 use Eventscase\MovieRental\Domain\Movie\Repository\MovieRepositoryInterface;
+use Eventscase\MovieRental\Domain\Movie\ValueObject\MovieId;
 use Eventscase\MovieRental\Tests\BaseTestCase;
 
 class MovieCreatorTest extends BaseTestCase
