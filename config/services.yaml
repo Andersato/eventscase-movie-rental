@@ -51,3 +51,8 @@ services:
         tags:
             - { name: tactician.event_listener, event: Eventscase\MovieRental\Domain\Order\Event\OrderStatusHasChanged, method: onOrderStatusChanged }
         public: true
+
+    Eventscase\MovieRental\Infrastructure\User\EventListener\UserWasCreatedListener:
+        tags:
+            - { name: tactician.event_listener, event: Eventscase\MovieRental\Domain\User\Event\UserWasCreated, method: onUserWasCreated }
+        public: true

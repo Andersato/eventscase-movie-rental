@@ -35,7 +35,7 @@ class CreateAdminUserCommand extends Command
     {
         $this
             ->addOption('email', null, InputOption::VALUE_REQUIRED, 'Email del usuario admin')
-            ->addOption('password', null, InputOption::VALUE_REQUIRED, 'Email del usuario admin');
+            ->addOption('password', null, InputOption::VALUE_REQUIRED, 'Contraseña del usuario admin');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

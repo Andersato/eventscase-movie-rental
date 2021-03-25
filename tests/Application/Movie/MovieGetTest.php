@@ -12,7 +12,7 @@ use Eventscase\MovieRental\Utils\TestData;
 
 class MovieGetTest extends BaseTestCase
 {
-    public function testMovieCreator(): void
+    public function testMovieGet(): void
     {
         $commandBus = $this->get('tactician.commandbus.default');
 

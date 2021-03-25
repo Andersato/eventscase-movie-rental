@@ -47,7 +47,7 @@ class TestData
         return [
             new User(
                 new UserId(UserId::random()->value()),
-                New Phone('690523147'),
+                New Phone('690523149'),
                 new Email(bin2hex(random_bytes(10)).'@gmail.com'),
                 new IdentificationNumber('546566546C'),
                 'User 1',
