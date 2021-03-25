@@ -47,33 +47,33 @@ class TestData
         return [
             new User(
                 new UserId(UserId::random()->value()),
-                new Address(
-                    '12003',
-                    '5',
-                    'Calle 1',
-                    'Ciudad 1'
-                ),
                 New Phone('690523147'),
                 new Email(bin2hex(random_bytes(10)).'@gmail.com'),
                 new IdentificationNumber('546566546C'),
                 'User 1',
                 'Apellido 1',
-                $encoder->encodePassword('123456', null)
+                $encoder->encodePassword('123456', null),
+                new Address(
+                    '12003',
+                    '5',
+                    'Calle 1',
+                    'Ciudad 1'
+                )
             ),
             new User(
                 new UserId(UserId::random()->value()),
-                new Address(
-                    '12004',
-                    '4',
-                    'Calle 2',
-                    'Ciudad 2'
-                ),
                 New Phone('690543147'),
                 new Email(bin2hex(random_bytes(10)).'@gmail.com'),
                 new IdentificationNumber('546566546D'),
                 'User 2',
                 'Apellido 2',
-                $encoder->encodePassword('123456', null)
+                $encoder->encodePassword('123456', null),
+                new Address(
+                    '12004',
+                    '4',
+                    'Calle 2',
+                    'Ciudad 2'
+                )
             )
         ];
     }
