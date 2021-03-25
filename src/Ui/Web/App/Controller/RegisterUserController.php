@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Eventscase\MovieRental\Ui\Web\User\Controller;
+namespace Eventscase\MovieRental\Ui\Web\App\Controller;
 
 use Eventscase\MovieRental\Application\Shared\Dto\Address\Address;
 use Eventscase\MovieRental\Application\User\Create\RegisterUserCommand;
@@ -42,6 +42,6 @@ final class RegisterUserController extends AbstractAppController
             }
         }
 
-        return $this->render('User/register.html.twig', []);
+        return $this->render('App/register.html.twig', []);
     }
 }

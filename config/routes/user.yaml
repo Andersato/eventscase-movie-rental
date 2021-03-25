@@ -6,11 +6,6 @@ user_login:
 user_logout:
   path: /logout
 
-register:
-  path: /register
-  controller: Eventscase\MovieRental\Ui\Web\User\Controller\RegisterUserController::register
-  methods: [POST, GET]
-
 rented_movies:
   path: /user/rented-movies
   controller: Eventscase\MovieRental\Ui\Web\User\Controller\RentedMoviesUserController::show

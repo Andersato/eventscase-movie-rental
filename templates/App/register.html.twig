@@ -1,12 +1,10 @@
-{% extends 'base.html.twig' %}
+{% extends '../base.html.twig' %}
 
 {% block title %}Registro{% endblock %}
 
 {% block body %}
     <div class="row">
-        <div class="col-md-3"></div>
-
-        <div class="col-md-5">
+        <div class="col-md-8">
             <h1>Registro de usuarios</h1>
 
             <form name="register" method="post" action="{{ path('register') }}">

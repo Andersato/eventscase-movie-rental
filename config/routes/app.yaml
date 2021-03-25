@@ -2,3 +2,8 @@ show:
   path: /movies
   controller: Eventscase\MovieRental\Ui\Web\App\Controller\ShowMoviesController::show
   methods: [GET, POST]
+
+register:
+  path: /register
+  controller: Eventscase\MovieRental\Ui\Web\App\Controller\RegisterUserController::register
+  methods: [POST, GET]

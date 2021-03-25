@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% set tab = 'movies' %}
+
 {% block body %}
     <div class="row">
-        <div class="col-md-3"></div>
-
-        <div class="col-md-6">
+        <div class="col-md-10">
             <h1>Películas</h1>
 
             {% if 0 < pager.total %}

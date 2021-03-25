@@ -1,7 +1,7 @@
 front_homepage:
   path: /
   controller: Eventscase\MovieRental\Ui\Web\App\Controller\ShowMoviesController::show
-  methods: [GET]
+  methods: [GET, POST]
 
 #index:
 #    path: /

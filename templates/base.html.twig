@@ -13,29 +13,64 @@
         {% endblock %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Menú</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+        <nav class="navbar navbar-dark bg-primary">
+            <a class="navbar-brand" href="{{ path('front_homepage') }}">VIDEOCLUB AST</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
-            <h1>VIDEOCLUB AST</h1>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    {% if app.user %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="nav-item active">
+                                <a class="nav-link {% if 'create_movie' == tab %}active{% endif %}" href="{{ path('create_movie_admin') }}">Crear película</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if 'show_movies' == tab %}active{% endif %}" href="{{ path('show_movies_admin') }}">Ver películas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if 'show_rental_all_movies' == tab %}active{% endif %}" href="{{ path('show_rental_movie_admin') }}">Ver alquileres</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item active">
+                                <a class="nav-link {% if 'rented_movies' == tab %}active{% endif %}" href="{{ path('rented_movies') }}">Películas alquiladas</a>
+                            </li>
+                        {% endif %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('user_logout') }}">Desconectarse</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('user_login') }}">Autenticarse</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('register') }}">Registrarse</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
         </nav>
 
-        {% for message in app.flashes('success') %}
-            <div class="alert alert-success">
-                {{ message }}
-            </div>
-        {% endfor %}
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
 
-        {% for message in app.flashes('error') %}
-            <div class="alert alert-danger">
-                {{ message }}
+                    {% for message in app.flashes('error') %}
+                        <div class="alert alert-danger">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-        {% endfor %}
 
-        {% block body %}
-        {% endblock %}
+            {% block body %}{% endblock %}
+        </div>
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
