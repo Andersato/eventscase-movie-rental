@@ -10,10 +10,6 @@ final class OrderStatusChangeListener
 {
     public function onOrderStatusChanged(OrderStatusHasChanged $event)
     {
-        $order = $event->getOrder();
-
-        if ($order->getStatus()) {
-
-        }
+        //@TODO Hacer envío de emails según determinados estados, esribir en logs, etc...
     }
 }

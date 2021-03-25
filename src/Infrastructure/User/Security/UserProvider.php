@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Eventscase\MovieRental\Infrastructure\User\Security;
 
-use Eventscase\MovieRental\Domain\User\Model\User;
-use Eventscase\MovieRental\Domain\User\Repository\UserRepositoryInterface;
+use Eventscase\MovieRental\Application\User\Find\GetUserLoginQuery;
+use League\Tactician\CommandBus;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -13,12 +13,11 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserProvider implements UserProviderInterface
 {
-    /** @var UserRepositoryInterface */
-    private $userRepository;
+    private $command;
 
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(CommandBus $commandBus)
     {
-        $this->userRepository = $userRepository;
+        $this->command = $commandBus;
     }
 
     /**
@@ -35,8 +34,7 @@ class UserProvider implements UserProviderInterface
      */
     public function loadUserByUsername($username)
     {
-        /** @var User $user */
-        $user = $this->userRepository->findByUsername($username);
+        $user = $this->command->handle(new GetUserLoginQuery($username));
 
         if (null === $user) {
             throw new UsernameNotFoundException();
@@ -72,8 +70,9 @@ class UserProvider implements UserProviderInterface
      */
     public function supportsClass($class)
     {
+        // @TODO revisar esto
         return true;
 
-        $class === Authenticator::class || $class === UserInterface::class;
+        $class === Authenticator::class;
     }
 }
